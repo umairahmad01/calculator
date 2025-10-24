@@ -25,7 +25,9 @@ function operate(numOne,operator,numTwo) {
     return divide(numOne,numTwo);
   }
 }
+let numThree = "";
 let list = []; 
+let arr = [];
 const body = document.querySelector("body");
 const display = document.createElement("div");
 body.appendChild(display);
@@ -41,79 +43,157 @@ const digitEight = document.querySelector(".eight");
 const digitNine = document.querySelector(".nine");
 digitZero.addEventListener("click",function() {
   display.textContent = "0";
-  list.push(0); 
+  list.push("0"); 
 });
 digitOne.addEventListener("click",function() {
   display.textContent =  "1";
-  list.push(1); 
+  list.push("1"); 
 });
 
 digitTwo.addEventListener("click",function() {
   display.textContent =  "2";
-  list.push(2); 
+  list.push("2"); 
 });
 
 digitThree.addEventListener("click",function() {
   display.textContent =  "3";
-  list.push(3); 
+  list.push("3"); 
 });
 
 digitFour.addEventListener("click", function() {
   display.textContent = "4"
-  list.push(4);
+  list.push("4");
 })
 digitFive.addEventListener("click",function() {
   display.textContent =  "5";
-  list.push(5); 
+  list.push("5"); 
 });
 digitSix.addEventListener("click",function() {
   display.textContent =  "6";
-  list.push(6);
+  list.push("6");
 });
 digitSeven.addEventListener("click",function() {
   display.textContent =  "7";
-  list.push(7);
+  list.push("7");
 });
 digitEight.addEventListener("click",function() {
   display.textContent =  "8";
-  list.push(8);
+  list.push("8");
 });
 digitNine.addEventListener("click",function() {
   display.textContent =  "9";
-  list.push(9);
+  list.push("9");
 });
 const plus = document.querySelector(".plus");
 plus.addEventListener("click", function() {
   display.textContent =  "+";
+  arr.push("+");
   list.push("+");
+if (arr.length > 1) {
+  let numOne = "";
+  let numTwo = "";
+  let pointer = list.indexOf(arr[0]);
+  for (let i = 0;i < pointer;i++) {
+    numOne += list[i];
+  }
+  for (let i = (pointer + 1);i < (list.length - 1);i++) {
+    numTwo += list[i];
+  }
+  let result = operate(Number(numOne),arr[0],Number(numTwo));
+  display.textContent = `${result}`;
+  numThree = result;
+}
 });
 const minus = document.querySelector(".minus");
 minus.addEventListener("click", function() {
   display.textContent =  "-";
+  arr.push("-");
   list.push("-");
+  if (arr.length > 1) {
+    let numOne = "";
+    let numTwo = "";
+    let pointer = list.indexOf(arr[0]);
+    for (let i = 0;i < pointer;i++) {
+      numOne += list[i];
+    }
+    for (let i = (pointer + 1);i < (list.length - 1);i++) {
+      numTwo += list[i];
+    }
+    let result = operate(Number(numOne),arr[0],Number(numTwo));
+    display.textContent = `${result}`;
+    numThree = result;
+  }
 });
 const x = document.querySelector(".x");
 x.addEventListener("click", function() {
   display.textContent =  "*";
+  arr.push("*");
   list.push("*");
+  if (arr.length > 1) {
+    let numOne = "";
+    let numTwo = "";
+    let pointer = list.indexOf(arr[0]);
+    for (let i = 0;i < pointer;i++) {
+      numOne += list[i];
+    }
+    for (let i = (pointer + 1);i < (list.length - 1);i++) {
+      numTwo += list[i];
+    }
+    let result = operate(Number(numOne),arr[0],Number(numTwo));
+    display.textContent = `${result}`;
+    numThree = result;
+  }
 });
 const division = document.querySelector(".divide");
 division.addEventListener("click", function() {
   display.textContent =  "/";
+  arr.push("/")
   list.push("/");
+  if (arr.length > 1) {
+    let numOne = "";
+    let numTwo = "";
+    let pointer = list.indexOf(arr[0]);
+    for (let i = 0;i < pointer;i++) {
+      numOne += list[i];
+    }
+    for (let i = (pointer + 1);i < (list.length - 1);i++) {
+      numTwo += list[i];
+    }
+    let result = operate(Number(numOne),arr[0],Number(numTwo));
+    display.textContent = `${result}`;
+    numThree = result;
+  }
 });
 const equal = document.querySelector(".equal");
 equal.addEventListener("click",function() {
-  console.log(list);
-  let result = 0;
-  result = operate(list[0],list[1],list[2]); 
-  display.textContent = `${result}`;
-  if (list.length >= 4) {
-    display.textContent = `${operate(result,list[3],list[4])}`;
+  if(numThree == "") {
+    let numOne = "";
+    let numTwo = "";
+    let pointer = list.indexOf(arr[0]);
+    for (let i = 0;i < pointer;i++) {
+      numOne += list[i];
+  }
+    for (let i = (pointer + 1);i < list.length;i++) {
+      numTwo += list[i];
+    }
+    let result = operate(Number(numOne),arr[0],Number(numTwo));
+    display.textContent = `${result}`;
+  }
+  else {
+    let index = numThree.toString().length;
+    let numOne = numThree;
+    let numTwo = "";
+    let pointer = list.indexOf(arr[1],(index + 1));
+    for (let i = (pointer + 1);i < list.length;i++) {
+      numTwo += list[i];
+    }
+    let result = operate(Number(numOne),arr[1],Number(numTwo));
+    display.textContent = `${result}`;
   }
 });
 const clear = document.querySelector(".clear");
 clear.addEventListener("click",function() {
   list = []; 
+  arr = [];
   display.textContent = " ";
 });
