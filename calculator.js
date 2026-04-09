@@ -92,6 +92,8 @@ plus.addEventListener("click", function() {
 if (arr.length > 1) {
   let numOne = "";
   let numTwo = "";
+  console.log(list);
+  console.log(arr);
   let pointer = list.indexOf(arr[0]);
   for (let i = 0;i < pointer;i++) {
     numOne += list[i];
@@ -184,6 +186,7 @@ equal.addEventListener("click",function() {
     let numOne = numThree;
     let numTwo = "";
     let pointer = list.indexOf(arr[1],(index + 1));
+    console.log(arr);
     for (let i = (pointer + 1);i < list.length;i++) {
       numTwo += list[i];
     }
