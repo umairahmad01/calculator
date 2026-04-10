@@ -52,7 +52,8 @@ function calculation(n) {
         operatorArr.length = 0;
         operatorArr.push(temp);
       }
-      else{
+      else {
+        numOne = '';
         operatorArr.length = 0;
       }
     }
