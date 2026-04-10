@@ -43,16 +43,21 @@ function storeValues(value) {
 function calculation(n) {
   operatorArr.push(n);
   if (operatorArr.length === 2) {
-    numOne = operate(Number(numOne),operatorArr[0],Number(numTwo));
-    numTwo = '';
-    displayCalculation(numOne);
-    if (operatorArr[1] !== "=") {
-      let temp = operatorArr[1];
-      operatorArr.length = 0;
-      operatorArr.push(temp);
+    if (numTwo !== "0") {
+      numOne = operate(Number(numOne),operatorArr[0],Number(numTwo));
+      numTwo = '';
+      displayCalculation(numOne);
+      if (operatorArr[1] !== "=") {
+        let temp = operatorArr[1];
+        operatorArr.length = 0;
+        operatorArr.push(temp);
+      }
+      else{
+        operatorArr.length = 0;
+      }
     }
-    else{
-      operatorArr.length = 0;
+    else {
+      alert("Don't divide by zero!");
     }
   }
 }
