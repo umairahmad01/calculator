@@ -26,13 +26,18 @@ function operate(numOne,operator,numTwo) {
   }
 }
 
-
+function displayCalculation(num) {
+  let input = document.querySelector("input");
+  input.value = num;
+}
 function storeValues(value) {
   if (operatorArr.length === 0) {
     numOne += value;
+    displayCalculation(numOne);
   }
   else if (operatorArr.length !== 0) {
     numTwo += value;
+    displayCalculation(numTwo);
   }
 }
 function calculation(n) {
@@ -40,7 +45,7 @@ function calculation(n) {
   if (operatorArr.length === 2) {
     numOne = operate(Number(numOne),operatorArr[0],Number(numTwo));
     numTwo = '';
-    console.log(numOne);
+    displayCalculation(numOne);
     if (operatorArr[1] !== "=") {
       let temp = operatorArr[1];
       operatorArr.length = 0;
@@ -51,10 +56,12 @@ function calculation(n) {
     }
   }
 }
-function clearArray() {
+function clearDisplay() {
     numOne = '';
     numTwo = '';
     operatorArr.length = 0;
+    let input = document.querySelector("input");
+    input.value = '';
 }
 let numOne = '';
 let numTwo = '';
@@ -109,7 +116,7 @@ buttons.forEach((button) => {
         calculation("+");
         break;
       case "clear":
-        clearArray();
+        clearDisplay();
         break;
     }
   });
