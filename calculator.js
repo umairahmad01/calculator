@@ -25,178 +25,49 @@ function operate(numOne,operator,numTwo) {
     return divide(numOne,numTwo);
   }
 }
-let numThree = "";
-let list = []; 
-let arr = [];
-const body = document.querySelector("body");
-const display = document.createElement("div");
-body.appendChild(display);
-const digitZero = document.querySelector(".zero");
-const digitOne = document.querySelector(".one");
-const digitTwo = document.querySelector(".two");
-const digitThree = document.querySelector(".three");
-const digitFour = document.querySelector(".four");
-const digitFive = document.querySelector(".five");
-const digitSix = document.querySelector(".six");
-const digitSeven = document.querySelector(".seven");
-const digitEight = document.querySelector(".eight");
-const digitNine = document.querySelector(".nine");
-digitZero.addEventListener("click",function() {
-  display.textContent = "0";
-  list.push("0"); 
-});
-digitOne.addEventListener("click",function() {
-  display.textContent =  "1";
-  list.push("1"); 
-});
-
-digitTwo.addEventListener("click",function() {
-  display.textContent =  "2";
-  list.push("2"); 
-});
-
-digitThree.addEventListener("click",function() {
-  display.textContent =  "3";
-  list.push("3"); 
-});
-
-digitFour.addEventListener("click", function() {
-  display.textContent = "4"
-  list.push("4");
-})
-digitFive.addEventListener("click",function() {
-  display.textContent =  "5";
-  list.push("5"); 
-});
-digitSix.addEventListener("click",function() {
-  display.textContent =  "6";
-  list.push("6");
-});
-digitSeven.addEventListener("click",function() {
-  display.textContent =  "7";
-  list.push("7");
-});
-digitEight.addEventListener("click",function() {
-  display.textContent =  "8";
-  list.push("8");
-});
-digitNine.addEventListener("click",function() {
-  display.textContent =  "9";
-  list.push("9");
-});
-const plus = document.querySelector(".plus");
-plus.addEventListener("click", function() {
-  display.textContent =  "+";
-  arr.push("+");
-  list.push("+");
-if (arr.length > 1) {
-  let numOne = "";
-  let numTwo = "";
-  console.log(list);
-  console.log(arr);
-  let pointer = list.indexOf(arr[0]);
-  for (let i = 0;i < pointer;i++) {
-    numOne += list[i];
+function storeValues (num) {
+  arr.push(num);
+  if (arr.includes("+")) {
+    let newArr = arr.slice(0,arr.indexOf("+"));
+    numOne = newArr.join("");
+    console.log("ONE: ",numOne);
+    secondValue("+");
   }
-  for (let i = (pointer + 1);i < (list.length - 1);i++) {
-    numTwo += list[i];
-  }
-  let result = operate(Number(numOne),arr[0],Number(numTwo));
-  display.textContent = `${result}`;
-  numThree = result;
 }
-});
-const minus = document.querySelector(".minus");
-minus.addEventListener("click", function() {
-  display.textContent =  "-";
-  arr.push("-");
-  list.push("-");
-  if (arr.length > 1) {
-    let numOne = "";
-    let numTwo = "";
-    let pointer = list.indexOf(arr[0]);
-    for (let i = 0;i < pointer;i++) {
-      numOne += list[i];
-    }
-    for (let i = (pointer + 1);i < (list.length - 1);i++) {
-      numTwo += list[i];
-    }
-    let result = operate(Number(numOne),arr[0],Number(numTwo));
-    display.textContent = `${result}`;
-    numThree = result;
+
+function secondValue(value) {
+  operator = value;
+  console.log(operator);
+  if (arr.includes("=")) {
+      let newArr = arr.slice(arr.indexOf(value) + 1,arr.indexOf("="));
+      numTwo = newArr.join("");
+      console.log("TWO: ",numTwo);
+      console.log(operate((+numOne),operator,(+numTwo)));
+      
+
   }
-});
-const x = document.querySelector(".x");
-x.addEventListener("click", function() {
-  display.textContent =  "*";
-  arr.push("*");
-  list.push("*");
-  if (arr.length > 1) {
-    let numOne = "";
-    let numTwo = "";
-    let pointer = list.indexOf(arr[0]);
-    for (let i = 0;i < pointer;i++) {
-      numOne += list[i];
+}
+let numOne = '';
+let numTwo = '';
+let operator = '';
+let arr = [];
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    switch (button.id) {
+      case "one":
+        storeValues("1");
+        break;
+      case "two":
+        storeValues("2");
+        break;
+      case "plus":
+        storeValues("+");
+        break;
+      
+      case "equal":
+        storeValues("=");
+        break;
     }
-    for (let i = (pointer + 1);i < (list.length - 1);i++) {
-      numTwo += list[i];
-    }
-    let result = operate(Number(numOne),arr[0],Number(numTwo));
-    display.textContent = `${result}`;
-    numThree = result;
-  }
-});
-const division = document.querySelector(".divide");
-division.addEventListener("click", function() {
-  display.textContent =  "/";
-  arr.push("/")
-  list.push("/");
-  if (arr.length > 1) {
-    let numOne = "";
-    let numTwo = "";
-    let pointer = list.indexOf(arr[0]);
-    for (let i = 0;i < pointer;i++) {
-      numOne += list[i];
-    }
-    for (let i = (pointer + 1);i < (list.length - 1);i++) {
-      numTwo += list[i];
-    }
-    let result = operate(Number(numOne),arr[0],Number(numTwo));
-    display.textContent = `${result}`;
-    numThree = result;
-  }
-});
-const equal = document.querySelector(".equal");
-equal.addEventListener("click",function() {
-  if(numThree == "") {
-    let numOne = "";
-    let numTwo = "";
-    let pointer = list.indexOf(arr[0]);
-    for (let i = 0;i < pointer;i++) {
-      numOne += list[i];
-  }
-    for (let i = (pointer + 1);i < list.length;i++) {
-      numTwo += list[i];
-    }
-    let result = operate(Number(numOne),arr[0],Number(numTwo));
-    display.textContent = `${result}`;
-  }
-  else {
-    let index = numThree.toString().length;
-    let numOne = numThree;
-    let numTwo = "";
-    let pointer = list.indexOf(arr[1],(index + 1));
-    console.log(arr);
-    for (let i = (pointer + 1);i < list.length;i++) {
-      numTwo += list[i];
-    }
-    let result = operate(Number(numOne),arr[1],Number(numTwo));
-    display.textContent = `${result}`;
-  }
-});
-const clear = document.querySelector(".clear");
-clear.addEventListener("click",function() {
-  list = []; 
-  arr = [];
-  display.textContent = " ";
+  });
 });
