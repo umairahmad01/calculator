@@ -40,10 +40,14 @@ function storeValues(value) {
     displayCalculation(numTwo);
   }
 }
+let number = '';
 function calculation(n) {
   operatorArr.push(n);
   if (operatorArr.length === 2) {
     if (numTwo !== "0") {
+      if (numOne === '') {
+        numOne = number;
+      }
       numOne = operate(Number(numOne),operatorArr[0],Number(numTwo));
       numTwo = '';
       displayCalculation(numOne);
@@ -53,6 +57,7 @@ function calculation(n) {
         operatorArr.push(temp);
       }
       else {
+        number = numOne;
         numOne = '';
         operatorArr.length = 0;
       }
